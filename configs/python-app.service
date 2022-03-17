@@ -1,0 +1,19 @@
+[Unit]
+Description=python-app
+Wants=network-online.target
+After=network-online.target
+#StartLimitBurst=5
+#StartLimitIntervalSec=60
+
+[Service]
+User=snake
+Group=snake
+Type=simple
+#Restart=on-failure
+#RestartSec=5
+EnvironmentFile=/home/snake/_target/.env
+WorkingDirectory=/home/snake/_target/src
+ExecStart=/usr/local/bin/hypercorn --config ../configs/hypercorn.toml main:app
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  fastapi:
+    container_name: fastapi
+    build: .
+    ports:
+      - 8000:8000
+    networks:
+      - fastapi
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+networks:
+  fastapi:
+    name: fastapi
